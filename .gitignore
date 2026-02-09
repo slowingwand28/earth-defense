@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Editor-specific ignores
+.vscode/
+
+# C#-specific ignores
+*.csproj
+*.sln
