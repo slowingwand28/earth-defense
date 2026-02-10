@@ -4,3 +4,4 @@
 
 [node name="world" type="Node2D" unique_id=433453165]
 script = ExtResource("1_a02cp")
+name = "Xander"
