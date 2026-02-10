@@ -13,7 +13,7 @@ config_version=5
 config/name="Earth Defense"
 run/main_scene="uid://bjn1rytvy8evt"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Asssets/icon.svg"
 
 [dotnet]
 
