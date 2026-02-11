@@ -1,7 +1,34 @@
 [gd_scene format=3 uid="uid://bjn1rytvy8evt"]
 
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Scripts/World.cs" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://bv6ki8hay5c4x" path="res://Scenes/region.tscn" id="2_go701"]
 
 [node name="world" type="Node2D" unique_id=433453165]
 script = ExtResource("1_a02cp")
-name = "Xander"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=298314057]
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 1165.0
+offset_bottom = 659.0
+color = Color(0.3842359, 0.66648126, 1, 1)
+
+[node name="Region" parent="." unique_id=1016656033 instance=ExtResource("2_go701")]
+position = Vector2(121, 37)
+RegionName = "Top Left"
+RegionColor = Color(0.17254902, 1, 0.105882354, 1)
+
+[node name="Region2" parent="." unique_id=1800880158 instance=ExtResource("2_go701")]
+position = Vector2(126, 335)
+RegionName = "Bottom Left"
+RegionColor = Color(1, 0, 0, 1)
+
+[node name="Region3" parent="." unique_id=458296510 instance=ExtResource("2_go701")]
+position = Vector2(787, 35)
+RegionName = "Top Right"
+RegionColor = Color(1, 1, 0, 1)
+
+[node name="Region4" parent="." unique_id=741894873 instance=ExtResource("2_go701")]
+position = Vector2(791, 351)
+RegionName = "Bottom Right"
+RegionColor = Color(0.7045723, 0.27579015, 1, 1)
