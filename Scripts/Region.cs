@@ -3,8 +3,8 @@ using System;
 
 public partial class Region : Node2D
 {
-    [Export] public string RegionName { get; set; } = "New Region";
-    [Export] public Color RegionColor { get; set; } = new Color(1, 1, 1); // Default to white
+    [Export] public string RegionName { get; set; } = "New Region"; // Sets name in editor. Default to "New Region"
+    [Export] public Color RegionColor { get; set; } = new Color(1, 1, 1); // Sets color in editor. Default to white
     private ColorRect _color;
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
