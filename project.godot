@@ -15,6 +15,10 @@ run/main_scene="uid://bjn1rytvy8evt"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://Asssets/icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="Earth Defense"
