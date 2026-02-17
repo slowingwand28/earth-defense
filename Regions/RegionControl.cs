@@ -25,7 +25,7 @@ public partial class RegionControl : Control
         {
         }
 
-        private void OnGuiInput(InputEvent @event)
+        private void OnGuiInput(InputEvent @event) // Handler for GUI input events, such as mouse clicks
         {
             if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
             {

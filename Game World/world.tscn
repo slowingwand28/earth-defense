@@ -14,18 +14,18 @@ offset_bottom = 659.0
 color = Color(0.3842359, 0.66648126, 1, 1)
 
 [node name="RegionControl" parent="." unique_id=10099660 instance=ExtResource("2_oqs7e")]
-offset_left = 257.0
-offset_top = 161.0
-offset_right = 257.0
-offset_bottom = 161.0
+offset_left = 253.0
+offset_top = 170.0
+offset_right = 253.0
+offset_bottom = 170.0
 RegionName = "Top Left"
 RegionColor = Color(0.17254902, 1, 0.105882354, 1)
 
 [node name="RegionControl2" parent="." unique_id=1940681872 instance=ExtResource("2_oqs7e")]
-offset_left = 258.0
-offset_top = 473.0
-offset_right = 258.0
-offset_bottom = 473.0
+offset_left = 254.0
+offset_top = 479.0
+offset_right = 254.0
+offset_bottom = 479.0
 RegionName = "Bottom Left"
 RegionColor = Color(1, 0, 0, 1)
 
