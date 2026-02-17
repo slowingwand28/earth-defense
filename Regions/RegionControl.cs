@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Region : Node2D
+public partial class RegionControl : Control
 {
     // Properties of the region, exposed to the editor for easy tweaking
     [Export] public string RegionName { get; set; } = "New Region"; // Name of the region. Defaults to "New Region"
@@ -11,16 +11,25 @@ public partial class Region : Node2D
     [Export] public double ResourceMultiplier { get; set; } = 1.0; // Multiplier for resource gathering, can be affected by events or upgrades
     [Export] public double StrengthMultiplier { get; set; } = 1.0; // Multiplier for region strength, can be affected by events or upgrades
 
-    private ColorRect _color; // Reference to the ColorRect node for changing color
+    private TextureRect _color; // Reference to the TextureRect node for changing color
         
         public override void _Ready() // Called when the node enters the scene tree for the first time.
         {
-            _color = GetNode<ColorRect>("ColorRect");
-            _color.Color = RegionColor;
+            _color = GetNode<TextureRect>("TextureRect");
+            _color.Modulate = RegionColor;
+            GuiInput += OnGuiInput; // Connect the input event to the handler
             GD.Print($"{RegionName} Ready");
         }
     
         public override void _Process(double delta) // Called every frame. 'delta' is the elapsed time since the previous frame.
         {
+        }
+
+        private void OnGuiInput(InputEvent @event)
+        {
+            if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
+            {
+                GD.Print($"{RegionName} clicked!");
+            }
         }
 }

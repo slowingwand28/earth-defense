@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjn1rytvy8evt"]
 
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Game World/World.cs" id="1_oqs7e"]
-[ext_resource type="PackedScene" uid="uid://bv6ki8hay5c4x" path="res://Regions/region.tscn" id="2_sb6le"]
+[ext_resource type="PackedScene" uid="uid://ddru62awu76b" path="res://Regions/region_control.tscn" id="2_oqs7e"]
 
 [node name="world" type="Node2D" unique_id=433453165]
 script = ExtResource("1_oqs7e")
@@ -13,22 +13,34 @@ offset_right = 1165.0
 offset_bottom = 659.0
 color = Color(0.3842359, 0.66648126, 1, 1)
 
-[node name="Region" parent="." unique_id=1016656033 instance=ExtResource("2_sb6le")]
-position = Vector2(121, 37)
+[node name="RegionControl" parent="." unique_id=10099660 instance=ExtResource("2_oqs7e")]
+offset_left = 257.0
+offset_top = 161.0
+offset_right = 257.0
+offset_bottom = 161.0
 RegionName = "Top Left"
 RegionColor = Color(0.17254902, 1, 0.105882354, 1)
 
-[node name="Region2" parent="." unique_id=1800880158 instance=ExtResource("2_sb6le")]
-position = Vector2(126, 335)
+[node name="RegionControl2" parent="." unique_id=1940681872 instance=ExtResource("2_oqs7e")]
+offset_left = 258.0
+offset_top = 473.0
+offset_right = 258.0
+offset_bottom = 473.0
 RegionName = "Bottom Left"
 RegionColor = Color(1, 0, 0, 1)
 
-[node name="Region3" parent="." unique_id=458296510 instance=ExtResource("2_sb6le")]
-position = Vector2(787, 35)
+[node name="RegionControl3" parent="." unique_id=1654852922 instance=ExtResource("2_oqs7e")]
+offset_left = 925.0
+offset_top = 161.0
+offset_right = 925.0
+offset_bottom = 161.0
 RegionName = "Top Right"
 RegionColor = Color(1, 1, 0, 1)
 
-[node name="Region4" parent="." unique_id=741894873 instance=ExtResource("2_sb6le")]
-position = Vector2(791, 351)
+[node name="RegionControl4" parent="." unique_id=1185891761 instance=ExtResource("2_oqs7e")]
+offset_left = 925.0
+offset_top = 470.0
+offset_right = 925.0
+offset_bottom = 470.0
 RegionName = "Bottom Right"
-RegionColor = Color(0.7045723, 0.27579015, 1, 1)
+RegionColor = Color(0.7058824, 0.27450982, 1, 1)
