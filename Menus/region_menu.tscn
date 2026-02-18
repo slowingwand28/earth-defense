@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cv1j3ooenbond" path="res://Menus/RegionMenu.cs" id="1_e72g4"]
 
 [node name="RegionMenu" type="Control" unique_id=1545210849]
+z_index = 1
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
