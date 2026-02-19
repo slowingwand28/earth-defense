@@ -6,19 +6,24 @@ public partial class RegionControl : Control
     // Properties of the region, exposed to the editor for easy tweaking
     [Export] public string RegionName { get; set; } = "New Region"; // Name of the region. Defaults to "New Region"
     [Export] public Color RegionColor { get; set; } = new Color(1, 1, 1); // Color of the region. Defaults to white
-    [Export] public int ResourceCount { get; set; } = 100; // Number of resources in the region, can be used for upgrades or events
+    [Export] public int ResourceCount { get; set; } = 100; // Number of resources in the region, can be spent on upgrades or events
     [Export] public int RegionStrength { get; set; } = 100; // Strength of the region, can be used for battles or events
-    [Export] public double ResourceMultiplier { get; set; } = 1.0; // Multiplier for resource gathering, can be affected by events or upgrades
-    [Export] public double StrengthMultiplier { get; set; } = 1.0; // Multiplier for region strength, can be affected by events or upgrades
+    [Export] public int ResourceGrowth { get; set; } = 25; // Amount of resources that grow each turn, can increase over time with upgrades
+    [Export] public int StrengthGrowth { get; set; } = 10; // Amount of strength that grows each turn, can increase over time with upgrades
+    [Export] public double ResourceMultiplier { get; set; } = 1.0; // Multiplier for resource growth, can be set per region and affected by events
+    [Export] public double StrengthMultiplier { get; set; } = 1.0; // Multiplier for strength growth, can be set per region and affected by events
     [Signal] public delegate void RegionClickedEventHandler(string regionName, int resourceCount, int regionStrength); // Signal to notify when this region is clicked
 
     private TextureRect _color; // Reference to the TextureRect node for changing color
+    private Node2D _world; // Reference to the world node, can be used for interactions with the world
         
     public override void _Ready() // Called when the node enters the scene tree for the first time.
     {
+        _world = GetTree().Root.GetNode<Node2D>("World"); // Get a reference to the world node, assuming it's at the root of the scene tree
         _color = GetNode<TextureRect>("TextureRect");
         _color.Modulate = RegionColor;
         GuiInput += OnGuiInput; // Connect the input event to the handler
+        _world.Connect("TurnPassed", new Callable(this, nameof(OnTurnPassed))); // Connect the TurnPassed signal from the world to the handler
         GD.Print($"{RegionName} Ready");
     }
 
@@ -35,5 +40,12 @@ public partial class RegionControl : Control
             EmitSignal(SignalName.RegionClicked, RegionName, ResourceCount, RegionStrength); // Emit a signal to notify that this region was clicked
             GD.Print($"{RegionName} clicked!");
         }
+    }
+
+    private void OnTurnPassed() // Handler for when the turn is passed, can be used to update resources or strength based on multipliers
+    {
+        ResourceCount += (int)Math.Round(ResourceGrowth * ResourceMultiplier); // Update resource count based on the multiplier
+        RegionStrength += (int)Math.Round(StrengthGrowth * StrengthMultiplier); // Update region strength based on the multiplier
+        GD.Print($"{RegionName} updated for new turn: Resources={ResourceCount}, Strength={RegionStrength}");
     }
 }

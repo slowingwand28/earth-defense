@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Game World/World.cs" id="1_oqs7e"]
 [ext_resource type="PackedScene" uid="uid://ddru62awu76b" path="res://Regions/region_control.tscn" id="2_oqs7e"]
 
-[node name="world" type="Node2D" unique_id=433453165]
+[node name="World" type="Node2D" unique_id=433453165]
 script = ExtResource("1_oqs7e")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=298314057]
@@ -46,3 +46,15 @@ offset_right = 925.0
 offset_bottom = 470.0
 RegionName = "Bottom Right"
 RegionColor = Color(0.7058824, 0.27450982, 1, 1)
+
+[node name="TurnButton" type="Button" parent="." unique_id=1331227646]
+offset_left = 560.0
+offset_top = 576.0
+offset_right = 656.0
+offset_bottom = 608.0
+text = "Pass Turn"
+
+[node name="TurnLabel" type="Label" parent="." unique_id=623683803]
+offset_right = 88.0
+offset_bottom = 23.0
+text = "Turn: "
