@@ -10,7 +10,7 @@ public partial class RegionControl : Control
     [Export] public int RegionStrength { get; set; } = 100; // Strength of the region, can be used for battles or events
     [Export] public double ResourceMultiplier { get; set; } = 1.0; // Multiplier for resource gathering, can be affected by events or upgrades
     [Export] public double StrengthMultiplier { get; set; } = 1.0; // Multiplier for region strength, can be affected by events or upgrades
-    [Signal] public delegate void RegionClickedEventHandler(RegionControl region); // Signal to notify when this region is clicked
+    [Signal] public delegate void RegionClickedEventHandler(string regionName, int resourceCount, int regionStrength); // Signal to notify when this region is clicked
 
     private TextureRect _color; // Reference to the TextureRect node for changing color
         
@@ -32,7 +32,7 @@ public partial class RegionControl : Control
             mouseEvent.Pressed && 
             mouseEvent.ButtonIndex == MouseButton.Left) // Check if the left mouse button was pressed
         {
-            EmitSignal(SignalName.RegionClicked, this); // Emit a signal to notify that this region was clicked
+            EmitSignal(SignalName.RegionClicked, RegionName, ResourceCount, RegionStrength); // Emit a signal to notify that this region was clicked
             GD.Print($"{RegionName} clicked!");
         }
     }

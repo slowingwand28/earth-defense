@@ -12,7 +12,7 @@ public partial class RegionMenu : Control
 	public override void _Ready()
 	{
 		_regionNameLabel = GetNode<Label>("RegionName");
-		_resourceCountLabel = GetNode<Label>("ResourceCount");
+		_resourceCountLabel = GetNode<Label>("RegionResources");
 		_regionStrengthLabel = GetNode<Label>("RegionStrength");
 		_exitButton = GetNode<Button>("Exit");
 		_exitButton.Pressed += OnExitButtonPressed;

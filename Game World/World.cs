@@ -23,12 +23,12 @@ public partial class World : Node2D
     {
     }
 
-    private void OnRegionClicked(RegionControl region) // Handler for when a region is clicked
+    private void OnRegionClicked(string regionName, int resourceCount, int regionStrength) // Handler for when a region is clicked
     {
         var menuInstance = _regionMenuScene.Instantiate<RegionMenu>(); // Create an instance of the region menu
         AddChild(menuInstance); // Add the menu to the scene tree to display it
         menuInstance.Position = GetViewport().GetVisibleRect().Size / 2; // Position the menu in the center of the screen
-        menuInstance.SetMenu(region.RegionName, region.ResourceCount, region.RegionStrength); // Set the menu information based on the clicked region
-        GD.Print($"Region {region.RegionName} clicked, menu opened");
+        menuInstance.SetMenu(regionName, resourceCount, regionStrength); // Set the menu information based on the clicked region
+        GD.Print($"Region {regionName} clicked, menu opened");
     }
 }
