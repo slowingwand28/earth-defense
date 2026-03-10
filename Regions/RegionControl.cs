@@ -12,7 +12,7 @@ public partial class RegionControl : Control
     [Export] public int BaseStrengthGrowth { get; set; } = 1; // Amount of strength that grows each turn, can increase over time with upgrades
     [Export] public float ResourceMultiplier { get; set; } = 1.0f; // Multiplier for resource growth, can be set per region and affected by events
     [Export] public float StrengthMultiplier { get; set; } = 1.0f; // Multiplier for strength growth, can be set per region and affected by events
-    [Signal] public delegate void RegionClickedEventHandler(string regionName, int resourceCount, int regionStrength); // Signal to notify when this region is clicked
+    [Signal] public delegate void RegionClickedEventHandler(RegionControl region); // Signal to notify when this region is clicked
 
     private TextureRect _color; // Reference to the TextureRect node for changing color
     private Node2D _world; // Reference to the world node, can be used for interactions with the world
@@ -37,7 +37,7 @@ public partial class RegionControl : Control
             mouseEvent.Pressed && 
             mouseEvent.ButtonIndex == MouseButton.Left) // Check if the left mouse button was pressed
         {
-            EmitSignal(SignalName.RegionClicked, RegionName, ResourceStock, Strength); // Emit a signal to notify that this region was clicked
+            EmitSignal(SignalName.RegionClicked, this); // Emit this region so the world can target upgrades correctly
             GD.Print($"{RegionName} clicked!");
         }
     }

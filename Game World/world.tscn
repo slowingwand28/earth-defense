@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Game World/World.cs" id="1_oqs7e"]
 [ext_resource type="PackedScene" uid="uid://ddru62awu76b" path="res://Regions/region_control.tscn" id="2_oqs7e"]
+[ext_resource type="PackedScene" uid="uid://cvqfx874uxxuy" path="res://Menus/region_menu.tscn" id="3_sb6le"]
 
 [node name="World" type="Node2D" unique_id=433453165]
 script = ExtResource("1_oqs7e")
@@ -16,41 +17,41 @@ color = Color(0.3842359, 0.66648126, 1, 1)
 [node name="AllRegions" type="Node" parent="." unique_id=854262339]
 
 [node name="RegionControl" parent="AllRegions" unique_id=10099660 instance=ExtResource("2_oqs7e")]
-offset_left = 256.0
+offset_left = 288.0
 offset_top = 160.0
-offset_right = 256.0
+offset_right = 288.0
 offset_bottom = 160.0
 RegionName = "Top Left"
 RegionColor = Color(0.17254902, 1, 0.105882354, 1)
 
 [node name="RegionControl2" parent="AllRegions" unique_id=1940681872 instance=ExtResource("2_oqs7e")]
-offset_left = 256.0
+offset_left = 288.0
 offset_top = 480.0
-offset_right = 256.0
+offset_right = 288.0
 offset_bottom = 480.0
 RegionName = "Bottom Left"
 RegionColor = Color(1, 0, 0, 1)
 
 [node name="RegionControl3" parent="AllRegions" unique_id=1654852922 instance=ExtResource("2_oqs7e")]
-offset_left = 904.0
+offset_left = 864.0
 offset_top = 160.0
-offset_right = 904.0
+offset_right = 864.0
 offset_bottom = 160.0
 RegionName = "Top Right"
 RegionColor = Color(1, 1, 0, 1)
 
 [node name="RegionControl4" parent="AllRegions" unique_id=1185891761 instance=ExtResource("2_oqs7e")]
-offset_left = 904.0
+offset_left = 864.0
 offset_top = 480.0
-offset_right = 904.0
+offset_right = 864.0
 offset_bottom = 480.0
 RegionName = "Bottom Right"
 RegionColor = Color(0.7058824, 0.27450982, 1, 1)
 
 [node name="TurnButton" type="Button" parent="." unique_id=1331227646]
-offset_left = 560.0
+offset_left = 528.0
 offset_top = 576.0
-offset_right = 656.0
+offset_right = 624.0
 offset_bottom = 608.0
 text = "Pass Turn"
 
@@ -58,3 +59,10 @@ text = "Pass Turn"
 offset_right = 88.0
 offset_bottom = 23.0
 text = "Turn: "
+
+[node name="RegionMenu" parent="." unique_id=1545210849 instance=ExtResource("3_sb6le")]
+visible = false
+offset_left = 576.0
+offset_top = 304.0
+offset_right = 576.0
+offset_bottom = 304.0
