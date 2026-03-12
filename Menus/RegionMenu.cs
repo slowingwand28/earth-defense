@@ -11,6 +11,14 @@ public partial class RegionMenu : Control
 	}
 
 	[Signal] public delegate void UpgradeEventHandler(int upgradeType); // Signal uses int for Variant compatibility; values map to UpgradeType enum
+
+	public static int GetUpgradeCost(UpgradeType upgradeType) => upgradeType switch // Single source of truth for upgrade costs
+	{
+		UpgradeType.Resources => 10,
+		UpgradeType.Strength => 10,
+		UpgradeType.Efficiency => 15,
+		_ => 0
+	};
 	private Label _regionNameLabel; // Label to display the region name
 	private Label _resourceCountLabel; // Label to display the resource count
 	private Label _regionStrengthLabel; // Label to display the region strength
@@ -59,6 +67,19 @@ public partial class RegionMenu : Control
 		_regionNameLabel.Text = $"Region: {name}"; // Update the region name label
 		_resourceCountLabel.Text = $"Resources: {resources}"; // Update the resource count label
 		_regionStrengthLabel.Text = $"Strength: {defense}"; // Update the region strength label
+
+		int resourcesCost = GetUpgradeCost(UpgradeType.Resources);
+		int strengthCost = GetUpgradeCost(UpgradeType.Strength);
+		int efficiencyCost = GetUpgradeCost(UpgradeType.Efficiency);
+
+		_resourcesCostLabel.Text = $"Cost: {resourcesCost}";
+		_strengthCostLabel.Text = $"Cost: {strengthCost}";
+		_efficiencyCostLabel.Text = $"Cost: {efficiencyCost}";
+
+		_upgradeResourcesButton.Disabled = resources < resourcesCost;
+		_upgradeStrengthButton.Disabled = resources < strengthCost;
+		_upgradeEfficiencyButton.Disabled = resources < efficiencyCost;
+
 		GD.Print($"RegionMenu updated for {name}");
 	}
 }

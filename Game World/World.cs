@@ -54,6 +54,8 @@ public partial class World : Node2D
         RegionMenu.UpgradeType upgradeType = (RegionMenu.UpgradeType)upgradeTypeValue;
 
         // Apply the selected upgrade to the active region's growth/multiplier stats.
+        _selectedRegion.ResourceStock -= RegionMenu.GetUpgradeCost(upgradeType); // Deduct the cost before applying the upgrade
+
         switch (upgradeType)
         {
             case RegionMenu.UpgradeType.Resources:
