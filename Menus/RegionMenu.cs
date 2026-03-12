@@ -25,6 +25,7 @@ public partial class RegionMenu : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// Get references to all the UI elements in the menu and connect button signals to emit upgrade events
 		_regionNameLabel = GetNode<Label>("RegionName");
 		_resourceCountLabel = GetNode<Label>("RegionResources");
 		_regionStrengthLabel = GetNode<Label>("RegionStrength");

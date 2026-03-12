@@ -44,22 +44,28 @@ public partial class World : Node2D
 
     private void OnUpgradeRequested(int upgradeTypeValue)
     {
+        // Ignore upgrade requests if no region is currently selected.
         if (_selectedRegion == null)
         {
             return;
         }
 
+        // Convert the integer payload from the UI signal into the typed enum.
         RegionMenu.UpgradeType upgradeType = (RegionMenu.UpgradeType)upgradeTypeValue;
 
+        // Apply the selected upgrade to the active region's growth/multiplier stats.
         switch (upgradeType)
         {
             case RegionMenu.UpgradeType.Resources:
+                // Increase per-turn resource growth.
                 _selectedRegion.BaseResourceGrowth += 1;
                 break;
             case RegionMenu.UpgradeType.Strength:
+                // Increase per-turn strength growth.
                 _selectedRegion.BaseStrengthGrowth += 1;
                 break;
             case RegionMenu.UpgradeType.Efficiency:
+                // Improve both resource and strength scaling multipliers.
                 _selectedRegion.ResourceMultiplier += 0.1f;
                 _selectedRegion.StrengthMultiplier += 0.1f;
                 break;
@@ -68,6 +74,7 @@ public partial class World : Node2D
                 return;
         }
 
+        // Refresh menu values after applying the upgrade.
         _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
         GD.Print($"Applied {upgradeType} upgrade to {_selectedRegion.RegionName}");
     }
