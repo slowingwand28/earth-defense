@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cv1j3ooenbond" path="res://Menus/RegionMenu.cs" id="1_e72g4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e72g4"]
+bg_color = Color(0.3372549, 0.3372549, 0.3372549, 1)
+
 [node name="RegionMenu" type="Control" unique_id=1545210849]
 z_index = 1
 layout_mode = 3
@@ -27,13 +30,15 @@ offset_right = 448.0
 offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e72g4")
 
 [node name="RegionName" type="Label" parent="." unique_id=801961392]
 layout_mode = 0
 offset_left = -96.0
-offset_top = -196.0
+offset_top = -220.0
 offset_right = 96.0
-offset_bottom = -156.0
+offset_bottom = -180.0
+theme_override_font_sizes/font_size = 25
 text = "Region Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -41,9 +46,10 @@ vertical_alignment = 1
 [node name="RegionResources" type="Label" parent="." unique_id=1553289399]
 layout_mode = 0
 offset_left = -384.0
-offset_top = -196.0
+offset_top = -172.0
 offset_right = -192.0
-offset_bottom = -156.0
+offset_bottom = -132.0
+theme_override_font_sizes/font_size = 20
 text = "Resources: "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -51,9 +57,10 @@ vertical_alignment = 1
 [node name="RegionStrength" type="Label" parent="." unique_id=1696835720]
 layout_mode = 0
 offset_left = 192.0
-offset_top = -196.0
+offset_top = -172.0
 offset_right = 384.0
-offset_bottom = -156.0
+offset_bottom = -132.0
+theme_override_font_sizes/font_size = 20
 text = "Strength: "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -70,26 +77,26 @@ text = "Exit
 [node name="Infrastructure Button" type="Button" parent="." unique_id=1787770791]
 layout_mode = 0
 offset_left = -336.0
-offset_top = 44.0
+offset_top = 60.0
 offset_right = -240.0
-offset_bottom = 75.0
+offset_bottom = 91.0
 text = "Upgrade"
 
 [node name="Efficiency Button" type="Button" parent="." unique_id=1688850011]
 layout_mode = 0
 offset_left = -48.0
-offset_top = 44.0
+offset_top = 60.0
 offset_right = 48.0
-offset_bottom = 75.0
+offset_bottom = 91.0
 text = "Upgrade
 "
 
 [node name="Military Button" type="Button" parent="." unique_id=1017609724]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 44.0
+offset_top = 60.0
 offset_right = 336.0
-offset_bottom = 75.0
+offset_bottom = 91.0
 text = "Upgrade
 "
 
@@ -99,6 +106,7 @@ offset_left = -384.0
 offset_top = -84.0
 offset_right = -192.0
 offset_bottom = -52.0
+theme_override_font_sizes/font_size = 20
 text = "Resource Upgrade"
 horizontal_alignment = 1
 
@@ -108,6 +116,7 @@ offset_left = -96.0
 offset_top = -84.0
 offset_right = 96.0
 offset_bottom = -52.0
+theme_override_font_sizes/font_size = 20
 text = "Efficiency Upgrade"
 horizontal_alignment = 1
 
@@ -117,42 +126,43 @@ offset_left = 192.0
 offset_top = -84.0
 offset_right = 384.0
 offset_bottom = -52.0
+theme_override_font_sizes/font_size = 20
 text = "Military Upgrade"
 horizontal_alignment = 1
 
 [node name="Infrastructure Cost" type="Label" parent="." unique_id=674747163]
 layout_mode = 0
 offset_left = -352.0
-offset_top = -52.0
+offset_top = -36.0
 offset_right = -224.0
-offset_bottom = -29.0
+offset_bottom = -13.0
 text = "Cost:"
 horizontal_alignment = 1
 
 [node name="Efficiency Cost" type="Label" parent="." unique_id=1223690309]
 layout_mode = 0
 offset_left = -64.0
-offset_top = -52.0
+offset_top = -36.0
 offset_right = 64.0
-offset_bottom = -29.0
+offset_bottom = -13.0
 text = "Cost:"
 horizontal_alignment = 1
 
 [node name="Military Cost" type="Label" parent="." unique_id=1778213675]
 layout_mode = 0
 offset_left = 224.0
-offset_top = -52.0
+offset_top = -36.0
 offset_right = 352.0
-offset_bottom = -29.0
+offset_bottom = -13.0
 text = "Cost:"
 horizontal_alignment = 1
 
 [node name="Explanation" type="Label" parent="." unique_id=1076455258]
 layout_mode = 0
 offset_left = -384.0
-offset_top = -20.0
+offset_top = -4.0
 offset_right = -192.0
-offset_bottom = 29.0
+offset_bottom = 45.0
 text = "Increases base growth of Region Resources"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -160,9 +170,9 @@ autowrap_mode = 3
 [node name="Explanation2" type="Label" parent="." unique_id=1604334026]
 layout_mode = 0
 offset_left = -112.0
-offset_top = -20.0
+offset_top = -4.0
 offset_right = 112.0
-offset_bottom = 36.0
+offset_bottom = 52.0
 text = "Increases growth multiplier of Region Resources"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -170,9 +180,9 @@ autowrap_mode = 3
 [node name="Explanation3" type="Label" parent="." unique_id=1990060633]
 layout_mode = 0
 offset_left = 192.0
-offset_top = -20.0
+offset_top = -4.0
 offset_right = 384.0
-offset_bottom = 29.0
+offset_bottom = 45.0
 text = "Increases base growth of Region Strength"
 horizontal_alignment = 1
 autowrap_mode = 3
