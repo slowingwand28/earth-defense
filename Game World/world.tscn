@@ -21,6 +21,7 @@ offset_left = 288.0
 offset_top = 160.0
 offset_right = 288.0
 offset_bottom = 160.0
+scale = Vector2(0.50199, 0.5)
 RegionName = "Top Left"
 RegionColor = Color(0.17254902, 1, 0.105882354, 1)
 
@@ -29,6 +30,7 @@ offset_left = 288.0
 offset_top = 480.0
 offset_right = 288.0
 offset_bottom = 480.0
+scale = Vector2(0.5, 0.5)
 RegionName = "Bottom Left"
 RegionColor = Color(1, 0, 0, 1)
 
@@ -37,6 +39,7 @@ offset_left = 864.0
 offset_top = 160.0
 offset_right = 864.0
 offset_bottom = 160.0
+scale = Vector2(0.5, 0.5)
 RegionName = "Top Right"
 RegionColor = Color(1, 1, 0, 1)
 
@@ -45,8 +48,27 @@ offset_left = 864.0
 offset_top = 480.0
 offset_right = 864.0
 offset_bottom = 480.0
+scale = Vector2(0.5, 0.5)
 RegionName = "Bottom Right"
 RegionColor = Color(0.7058824, 0.27450982, 1, 1)
+
+[node name="RegionControl5" parent="AllRegions" unique_id=807356359 instance=ExtResource("2_oqs7e")]
+offset_left = 576.0
+offset_top = 160.0
+offset_right = 576.0
+offset_bottom = 160.0
+scale = Vector2(0.50199, 0.5)
+RegionName = "Top Mid"
+RegionColor = Color(0.18040434, 0.42763692, 1, 1)
+
+[node name="RegionControl6" parent="AllRegions" unique_id=1405177436 instance=ExtResource("2_oqs7e")]
+offset_left = 576.0
+offset_top = 480.0
+offset_right = 576.0
+offset_bottom = 480.0
+scale = Vector2(0.50199, 0.5)
+RegionName = "Bottom Mid"
+RegionColor = Color(0.94018096, 0.58114433, 0.7281479, 1)
 
 [node name="TurnButton" type="Button" parent="." unique_id=1331227646]
 offset_left = 528.0

@@ -14,9 +14,9 @@ public partial class RegionMenu : Control
 
 	public static int GetUpgradeCost(UpgradeType upgradeType) => upgradeType switch // Single source of truth for upgrade costs
 	{
-		UpgradeType.Resources => 10,
-		UpgradeType.Strength => 10,
-		UpgradeType.Efficiency => 15,
+		UpgradeType.Resources => 12,
+		UpgradeType.Strength => 14,
+		UpgradeType.Efficiency => 22,
 		_ => 0
 	};
 	private Label _regionNameLabel; // Label to display the region name
