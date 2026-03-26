@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://dlrcw6xe5qx1b"]
 
+[ext_resource type="Script" uid="uid://ryox54w7ggeu" path="res://Menus/main_menu.gd" id="1_jf8mj"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e72g4"]
 bg_color = Color(0.3372549, 0.3372549, 0.3372549, 1)
 
 [node name="MainMenu" type="Control" unique_id=1545210849]
+process_mode = 3
 z_index = 1
 layout_mode = 3
 anchors_preset = 8
@@ -13,6 +16,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jf8mj")
 
 [node name="Panel" type="Panel" parent="." unique_id=1183457897]
 layout_mode = 1
@@ -29,39 +33,39 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_e72g4")
 
-[node name="RegionName" type="Label" parent="." unique_id=801961392]
+[node name="Title" type="Label" parent="." unique_id=801961392]
 layout_mode = 0
-offset_left = -96.0
-offset_top = -220.0
-offset_right = 96.0
-offset_bottom = -180.0
+offset_left = -128.0
+offset_top = -196.0
+offset_right = 128.0
+offset_bottom = -132.0
 theme_override_font_sizes/font_size = 25
-text = "{Placeholder}"
+text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Infrastructure Button" type="Button" parent="." unique_id=1787770791]
+[node name="Button1" type="Button" parent="." unique_id=1787770791]
 layout_mode = 0
-offset_left = -336.0
-offset_top = 60.0
-offset_right = -240.0
-offset_bottom = 91.0
-text = "Upgrade"
+offset_left = -320.0
+offset_top = 68.0
+offset_right = -192.0
+offset_bottom = 116.0
+text = "Restart Game"
 
-[node name="Efficiency Button" type="Button" parent="." unique_id=1688850011]
+[node name="Button2" type="Button" parent="." unique_id=1688850011]
 layout_mode = 0
-offset_left = -48.0
-offset_top = 60.0
-offset_right = 48.0
-offset_bottom = 91.0
-text = "Upgrade
+offset_left = -64.0
+offset_top = 68.0
+offset_right = 64.0
+offset_bottom = 115.0
+text = "Resume Game
 "
 
-[node name="Military Button" type="Button" parent="." unique_id=1017609724]
+[node name="Button3" type="Button" parent="." unique_id=1017609724]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 60.0
-offset_right = 336.0
-offset_bottom = 91.0
-text = "Upgrade
+offset_left = 192.0
+offset_top = 68.0
+offset_right = 320.0
+offset_bottom = 116.0
+text = "Exit Game
 "
