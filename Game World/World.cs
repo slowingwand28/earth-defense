@@ -9,12 +9,19 @@ public partial class World : Node2D
     [Export] public int _attackFrequency = 4; // Attack every N turns
     [Export] public int _winTurn = 45; // Survive until this turn to win
     [Signal] public delegate void TurnPassedEventHandler(); // Signal to notify when the turn has been passed
+    [Signal] public delegate void GameOverEventHandler(EndState endState); // Signal to notify when the game is over, can be used to trigger endgame events or screens
+    [Signal] public delegate void PauseGameEventHandler(); // Signal to notify when the game is paused, can be used to trigger pause menu or effects
     private RegionMenu _regionMenu; // Reference to the region menu control, can be used to show and update the menu when a region is clicked
     private RegionControl _selectedRegion; // Currently selected region; upgrades apply only to this instance
     private Node _allRegions; // Node to hold all region instances, can be used for organization and management
     private Button _turnButton; // Button to pass the turn, can be used to trigger end-of-turn events
     private Label _turnLabel; // Label to display the current turn count, can be updated each turn
     private int _turnCount = 1; // Counter to keep track of the number of turns that have passed, can be used for game progression or events
+    public enum EndState
+    {
+        Defeat,
+        Victory
+    }
 
      // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -115,8 +122,8 @@ public partial class World : Node2D
             attack();
             if (ActiveRegions().Count == 0) // Check if all regions have been conquered after the attack
             {
-                GD.Print("All regions have been conquered! Game Over.");
-                _turnButton.Disabled = true; // Disable the turn button to end the game
+                EmitSignal(SignalName.GameOver, (int)EndState.Defeat); // Emit game over signal with defeat state
+                _turnButton.Disabled = true; // Disable the turn button to prevent further turns after game over
                 return;
             }
 
@@ -124,8 +131,8 @@ public partial class World : Node2D
         }
         if (_turnCount == _winTurn) // Check for a win condition at the configured turn
         {
-            GD.Print($"Congratulations! You have survived {_winTurn} turns and won the game!");
-            _turnButton.Disabled = true; // Disable the turn button to end the game
+            EmitSignal(SignalName.GameOver, (int)EndState.Victory); // Emit game over signal with victory state
+            _turnButton.Disabled = true; // Disable the turn button to prevent further turns after game over
         }
     }
 
