@@ -52,6 +52,7 @@ func _show_pause_menu():
 	title_label.text = "PAUSED"
 	subtitle_label.text = ""
 	resume_button.text = "Resume"
+	resume_button.visible = true
 	background.visible = true
 
 func _resume_game():
@@ -78,7 +79,7 @@ func _on_game_over(end_state_value: int):
 		title_label.text = "VICTORY"
 		subtitle_label.text = "Congratulations!\nYou have survived all attacks!"
 	
-	resume_button.text = "Close"
+	resume_button.visible = false
 	background.visible = true
 	
 	print("Game over screen: ", end_state)
