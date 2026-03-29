@@ -33,7 +33,7 @@ func _ready():
 	if error2 != OK:
 		push_warning("Failed to connect GameOver signal.")
 
-func _process(delta):
+func _process(_delta):
 	# Allow ESC key to toggle pause menu open/closed
 	if Input.is_action_just_pressed("ui_cancel") and (current_state == "none" or current_state == "pause"):
 		_toggle_pause()
