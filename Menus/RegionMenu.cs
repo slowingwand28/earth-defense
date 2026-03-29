@@ -34,16 +34,16 @@ public partial class RegionMenu : Control
 	public override void _Ready()
 	{
 		// Get references to all the UI elements in the menu and connect button signals to emit upgrade events
-		_regionNameLabel = GetNode<Label>("RegionName");
-		_resourceCountLabel = GetNode<Label>("RegionResources");
-		_regionStrengthLabel = GetNode<Label>("RegionStrength");
-		_resourcesCostLabel = GetNode<Label>("Infrastructure Cost");
-		_strengthCostLabel = GetNode<Label>("Military Cost");
-		_efficiencyCostLabel = GetNode<Label>("Efficiency Cost");
-		_upgradeResourcesButton = GetNode<Button>("Infrastructure Button");
-		_upgradeStrengthButton = GetNode<Button>("Military Button");
-		_upgradeEfficiencyButton = GetNode<Button>("Efficiency Button");
-		_exitButton = GetNode<Button>("Exit");
+		_regionNameLabel = GetNode<Label>("Panel/Content/RegionName");
+		_resourceCountLabel = GetNode<Label>("Panel/Content/StatsRow/RegionResources");
+		_regionStrengthLabel = GetNode<Label>("Panel/Content/StatsRow/RegionStrength");
+		_resourcesCostLabel = GetNode<Label>("Panel/Content/CostRow/Infrastructure Cost");
+		_strengthCostLabel = GetNode<Label>("Panel/Content/CostRow/Military Cost");
+		_efficiencyCostLabel = GetNode<Label>("Panel/Content/CostRow/Efficiency Cost");
+		_upgradeResourcesButton = GetNode<Button>("Panel/Content/UpgradeButtonRow/Infrastructure Button");
+		_upgradeStrengthButton = GetNode<Button>("Panel/Content/UpgradeButtonRow/Military Button");
+		_upgradeEfficiencyButton = GetNode<Button>("Panel/Content/UpgradeButtonRow/Efficiency Button");
+		_exitButton = GetNode<Button>("Panel/Content/Exit");
 		_upgradeResourcesButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Resources); // Connect the resources upgrade button to emit an upgrade signal with the type Resources
 		_upgradeStrengthButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Strength); // Connect the strength upgrade button to emit an upgrade signal with the type Strength
 		_upgradeEfficiencyButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Efficiency); // Connect the efficiency upgrade button to emit an upgrade signal with the type Efficiency

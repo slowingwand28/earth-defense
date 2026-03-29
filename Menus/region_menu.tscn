@@ -3,7 +3,27 @@
 [ext_resource type="Script" uid="uid://cv1j3ooenbond" path="res://Menus/RegionMenu.cs" id="1_e72g4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e72g4"]
-bg_color = Color(0.3372549, 0.3372549, 0.3372549, 1)
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_region_button"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_region_button_hover"]
+bg_color = Color(0.55, 0.55, 0.55, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [node name="RegionMenu" type="Control" unique_id=1545210849]
 z_index = 1
@@ -32,157 +52,167 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_e72g4")
 
-[node name="RegionName" type="Label" parent="." unique_id=801961392]
-layout_mode = 0
-offset_left = -96.0
-offset_top = -220.0
-offset_right = 96.0
-offset_bottom = -180.0
-theme_override_font_sizes/font_size = 25
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=2008724816]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="RegionName" type="Label" parent="Panel/Content" unique_id=801961392]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Region Name"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="RegionResources" type="Label" parent="." unique_id=1553289399]
-layout_mode = 0
-offset_left = -384.0
-offset_top = -172.0
-offset_right = -192.0
-offset_bottom = -132.0
-theme_override_font_sizes/font_size = 20
-text = "Resources: "
+[node name="StatsRow" type="HBoxContainer" parent="Panel/Content" unique_id=2004055685]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 64
+
+[node name="RegionResources" type="Label" parent="Panel/Content/StatsRow" unique_id=1553289399]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Resources:"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="RegionStrength" type="Label" parent="." unique_id=1696835720]
-layout_mode = 0
-offset_left = 192.0
-offset_top = -172.0
-offset_right = 384.0
-offset_bottom = -132.0
-theme_override_font_sizes/font_size = 20
-text = "Strength: "
+[node name="RegionStrength" type="Label" parent="Panel/Content/StatsRow" unique_id=1696835720]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Strength:"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="." unique_id=544762671]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 188.0
-offset_right = 40.0
-offset_bottom = 219.0
-text = "Exit
-"
+[node name="TopSpacer" type="Control" parent="Panel/Content" unique_id=29514987]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 
-[node name="Infrastructure Button" type="Button" parent="." unique_id=1787770791]
-layout_mode = 0
-offset_left = -336.0
-offset_top = 60.0
-offset_right = -240.0
-offset_bottom = 91.0
-text = "Upgrade"
+[node name="UpgradeTitleRow" type="HBoxContainer" parent="Panel/Content" unique_id=1689512931]
+layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="Efficiency Button" type="Button" parent="." unique_id=1688850011]
-layout_mode = 0
-offset_left = -48.0
-offset_top = 60.0
-offset_right = 48.0
-offset_bottom = 91.0
-text = "Upgrade
-"
-
-[node name="Military Button" type="Button" parent="." unique_id=1017609724]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 60.0
-offset_right = 336.0
-offset_bottom = 91.0
-text = "Upgrade
-"
-
-[node name="Upgrade Label" type="Label" parent="." unique_id=364742514]
-layout_mode = 0
-offset_left = -384.0
-offset_top = -84.0
-offset_right = -192.0
-offset_bottom = -52.0
+[node name="Upgrade Label" type="Label" parent="Panel/Content/UpgradeTitleRow" unique_id=364742514]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Resource Upgrade"
 horizontal_alignment = 1
 
-[node name="Upgrade Label2" type="Label" parent="." unique_id=1861342403]
-layout_mode = 0
-offset_left = -96.0
-offset_top = -84.0
-offset_right = 96.0
-offset_bottom = -52.0
+[node name="Upgrade Label2" type="Label" parent="Panel/Content/UpgradeTitleRow" unique_id=1861342403]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Efficiency Upgrade"
 horizontal_alignment = 1
 
-[node name="Upgrade Label3" type="Label" parent="." unique_id=1939726110]
-layout_mode = 0
-offset_left = 192.0
-offset_top = -84.0
-offset_right = 384.0
-offset_bottom = -52.0
+[node name="Upgrade Label3" type="Label" parent="Panel/Content/UpgradeTitleRow" unique_id=1939726110]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Military Upgrade"
 horizontal_alignment = 1
 
-[node name="Infrastructure Cost" type="Label" parent="." unique_id=674747163]
-layout_mode = 0
-offset_left = -352.0
-offset_top = -36.0
-offset_right = -224.0
-offset_bottom = -13.0
+[node name="CostRow" type="HBoxContainer" parent="Panel/Content" unique_id=676944713]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Infrastructure Cost" type="Label" parent="Panel/Content/CostRow" unique_id=674747163]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Cost:"
 horizontal_alignment = 1
 
-[node name="Efficiency Cost" type="Label" parent="." unique_id=1223690309]
-layout_mode = 0
-offset_left = -64.0
-offset_top = -36.0
-offset_right = 64.0
-offset_bottom = -13.0
+[node name="Efficiency Cost" type="Label" parent="Panel/Content/CostRow" unique_id=1223690309]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Cost:"
 horizontal_alignment = 1
 
-[node name="Military Cost" type="Label" parent="." unique_id=1778213675]
-layout_mode = 0
-offset_left = 224.0
-offset_top = -36.0
-offset_right = 352.0
-offset_bottom = -13.0
+[node name="Military Cost" type="Label" parent="Panel/Content/CostRow" unique_id=1778213675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Cost:"
 horizontal_alignment = 1
 
-[node name="Explanation" type="Label" parent="." unique_id=1076455258]
-layout_mode = 0
-offset_left = -384.0
-offset_top = -4.0
-offset_right = -192.0
-offset_bottom = 45.0
+[node name="ExplanationRow" type="HBoxContainer" parent="Panel/Content" unique_id=1239433614]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Explanation" type="Label" parent="Panel/Content/ExplanationRow" unique_id=1076455258]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
 text = "Increases base growth of Region Resources"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Explanation2" type="Label" parent="." unique_id=1604334026]
-layout_mode = 0
-offset_left = -112.0
-offset_top = -4.0
-offset_right = 112.0
-offset_bottom = 52.0
+[node name="Explanation2" type="Label" parent="Panel/Content/ExplanationRow" unique_id=1604334026]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
 text = "Increases growth multiplier of Region Resources"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Explanation3" type="Label" parent="." unique_id=1990060633]
-layout_mode = 0
-offset_left = 192.0
-offset_top = -4.0
-offset_right = 384.0
-offset_bottom = 45.0
+[node name="Explanation3" type="Label" parent="Panel/Content/ExplanationRow" unique_id=1990060633]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
 text = "Increases base growth of Region Strength"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="UpgradeButtonRow" type="HBoxContainer" parent="Panel/Content" unique_id=248388155]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Infrastructure Button" type="Button" parent="Panel/Content/UpgradeButtonRow" unique_id=1787770791]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_region_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_region_button_hover")
+text = "Upgrade"
+
+[node name="Efficiency Button" type="Button" parent="Panel/Content/UpgradeButtonRow" unique_id=1688850011]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_region_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_region_button_hover")
+text = "Upgrade"
+
+[node name="Military Button" type="Button" parent="Panel/Content/UpgradeButtonRow" unique_id=1017609724]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_region_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_region_button_hover")
+text = "Upgrade"
+
+[node name="BottomSpacer" type="Control" parent="Panel/Content" unique_id=452567019]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="Panel/Content" unique_id=544762671]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_region_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_region_button_hover")
+text = "Exit"
