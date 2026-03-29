@@ -3,10 +3,14 @@
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Game World/World.cs" id="1_oqs7e"]
 [ext_resource type="PackedScene" uid="uid://ddru62awu76b" path="res://Regions/region_control.tscn" id="2_oqs7e"]
 [ext_resource type="PackedScene" uid="uid://cvqfx874uxxuy" path="res://Menus/region_menu.tscn" id="3_sb6le"]
+[ext_resource type="PackedScene" path="res://Menus/pause_overlay.tscn" id="4_pause"]
 
 [node name="World" type="Node2D" unique_id=433453165]
 process_mode = 1
 script = ExtResource("1_oqs7e")
+_attackStrength = 100
+_attackFrequency = 2
+_winTurn = 5
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=298314057]
 offset_left = -12.0
@@ -78,9 +82,19 @@ offset_right = 624.0
 offset_bottom = 608.0
 text = "Pass Turn"
 
+[node name="PauseButton" type="Button" parent="." unique_id=1750093122]
+process_mode = 3
+offset_left = 1024.0
+offset_top = 24.0
+offset_right = 1128.0
+offset_bottom = 56.0
+text = "Pause Game"
+
 [node name="TurnLabel" type="Label" parent="." unique_id=623683803]
-offset_right = 88.0
-offset_bottom = 23.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 31.0
 text = "Turn: "
 
 [node name="RegionMenu" parent="." unique_id=1545210849 instance=ExtResource("3_sb6le")]
@@ -89,3 +103,5 @@ offset_left = 576.0
 offset_top = 304.0
 offset_right = 576.0
 offset_bottom = 304.0
+
+[node name="PauseOverlay" parent="." unique_id=383955342 instance=ExtResource("4_pause")]

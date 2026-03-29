@@ -48,7 +48,6 @@ public partial class RegionMenu : Control
 		_upgradeStrengthButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Strength); // Connect the strength upgrade button to emit an upgrade signal with the type Strength
 		_upgradeEfficiencyButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Efficiency); // Connect the efficiency upgrade button to emit an upgrade signal with the type Efficiency
 		_exitButton.Pressed += OnExitButtonPressed;
-		GD.Print("RegionMenu Ready");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,7 +58,6 @@ public partial class RegionMenu : Control
 	private void OnExitButtonPressed() // Handler for the exit button press event, could be replaced with a lambda for simplicity
 	{
 		Visible = false; // Hide the menu when the exit button is pressed
-		GD.Print("RegionMenu closed");
 	}
 
 	public void SetMenu(string name, int resources, int defense) // Method to update the menu with the selected region's information
@@ -79,7 +77,5 @@ public partial class RegionMenu : Control
 		_upgradeResourcesButton.Disabled = resources < resourcesCost;
 		_upgradeStrengthButton.Disabled = resources < strengthCost;
 		_upgradeEfficiencyButton.Disabled = resources < efficiencyCost;
-
-		GD.Print($"RegionMenu updated for {name}");
 	}
 }

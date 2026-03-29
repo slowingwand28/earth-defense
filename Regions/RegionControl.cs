@@ -25,7 +25,6 @@ public partial class RegionControl : Control
         _color.Modulate = RegionColor;
         GuiInput += OnGuiInput; // Connect the input event to the handler
         _world.Connect("TurnPassed", new Callable(this, nameof(OnTurnPassed))); // Connect the TurnPassed signal from the world to the handler
-        GD.Print($"{RegionName} Ready");
     }
 
     public override void _Process(double delta) // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,7 +39,6 @@ public partial class RegionControl : Control
             Active == true) // Check if the left mouse button was pressed and the region is active before emitting the click signal
         {
             EmitSignal(SignalName.RegionClicked, this); // Emit this region so the world can target upgrades correctly
-            GD.Print($"{RegionName} clicked!");
         }
     }
 
@@ -48,7 +46,6 @@ public partial class RegionControl : Control
     {
         ResourceStock += Mathf.RoundToInt(BaseResourceGrowth * ResourceMultiplier); // Update resource count based on the multiplier
         Strength += Mathf.RoundToInt(BaseStrengthGrowth * StrengthMultiplier); // Update region strength based on the multiplier
-        GD.Print($"{RegionName} updated for new turn: Resources={ResourceStock}, Strength={Strength}");
     }
 
     public void Conquered() // Method to handle when the region is conquered, can be called from the world or events

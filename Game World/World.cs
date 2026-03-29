@@ -15,6 +15,7 @@ public partial class World : Node2D
     private RegionControl _selectedRegion; // Currently selected region; upgrades apply only to this instance
     private Node _allRegions; // Node to hold all region instances, can be used for organization and management
     private Button _turnButton; // Button to pass the turn, can be used to trigger end-of-turn events
+    private Button _pauseButton; // Button to pause the game, can be used to trigger the pause signal and show the pause menu
     private Label _turnLabel; // Label to display the current turn count, can be updated each turn
     private int _turnCount = 1; // Counter to keep track of the number of turns that have passed, can be used for game progression or events
     public enum EndState
@@ -33,12 +34,14 @@ public partial class World : Node2D
         _turnLabel = GetNode<Label>("TurnLabel"); // Get the label to display the turn count
         _turnLabel.Text = $"Turn: {_turnCount}"; // Set the initial turn count text
         _turnButton = GetNode<Button>("TurnButton"); // Get the button to pass the turn
+        _pauseButton = GetNode<Button>("PauseButton"); // Get the button to pause the game
         _turnButton.Pressed += OnTurnButtonPressed; // Connect the button's pressed signal to emit the TurnPassed signal when clicked
+        _pauseButton.Pressed += OnPauseButtonPressed; // Connect the button's pressed signal to emit the PauseGame signal when clicked
         foreach (RegionControl region in _allRegions.GetChildren()) // Connect the RegionClicked signal for each region to the handler
         {
             region.RegionClicked += OnRegionClicked;
         }
-        GD.Print("World Ready");
+        GD.Print("World initialized.");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,7 +54,6 @@ public partial class World : Node2D
         _selectedRegion = region;
         _regionMenu.Visible = true; // Show the region menu
         _regionMenu.SetMenu(region.RegionName, region.ResourceStock, region.Strength); // Set the menu information based on the clicked region
-        GD.Print($"Region {region.RegionName} clicked, menu opened");
     }
 
     private void OnUpgradeRequested(int upgradeTypeValue)
@@ -99,7 +101,6 @@ public partial class World : Node2D
 
         // Refresh menu values after applying the upgrade.
         _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
-        GD.Print($"Applied {upgradeType} upgrade to {_selectedRegion.RegionName}");
     }
 
     private void OnTurnButtonPressed() // Handler for when the turn button is pressed
@@ -114,16 +115,14 @@ public partial class World : Node2D
             _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
         }
 
-        GD.Print($"Turn passed. Current turn: {_turnCount}");
-
         if (_turnCount % _attackFrequency == 0) // Attacks every configured number of turns
         {
-            GD.Print("An attack event has occurred!");
             attack();
             if (ActiveRegions().Count == 0) // Check if all regions have been conquered after the attack
             {
                 EmitSignal(SignalName.GameOver, (int)EndState.Defeat); // Emit game over signal with defeat state
                 _turnButton.Disabled = true; // Disable the turn button to prevent further turns after game over
+                GD.Print("Game over: defeat.");
                 return;
             }
 
@@ -133,6 +132,7 @@ public partial class World : Node2D
         {
             EmitSignal(SignalName.GameOver, (int)EndState.Victory); // Emit game over signal with victory state
             _turnButton.Disabled = true; // Disable the turn button to prevent further turns after game over
+            GD.Print("Game over: victory.");
         }
     }
 
@@ -167,8 +167,12 @@ public partial class World : Node2D
             else // Otherwise, reduce the region's strength by the attack damage
             {
                 region.Strength -= attackDamage; // Reduce the region's strength by the attack damage
-                GD.Print($"{region.RegionName} was attacked! New Strength: {region.Strength}");
             }
         }
+    }
+
+    private void OnPauseButtonPressed() // Handler for when the pause button is pressed
+    {
+        EmitSignal(SignalName.PauseGame); // Emit the pause signal to notify UI controller
     }
 }
