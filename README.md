@@ -23,7 +23,7 @@ Instructions for using the software:
 
 To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-* Godot Engine 4.x (with C# support)
+* Godot Engine 4.6 (with C# support)
 * .NET 8.0 or higher
 * VSCode with the following extensions:
   * C# Dev Kit
