@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cvqfx874uxxuy"]
 
 [ext_resource type="Script" uid="uid://cv1j3ooenbond" path="res://Menus/RegionMenu.cs" id="1_e72g4"]
+[ext_resource type="AudioStream" uid="uid://cdjq7mpd85ou2" path="res://Asssets/Audio/Menu.wav" id="2_dsg4t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e72g4"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -36,6 +37,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e72g4")
+_menuToggleSfx = ExtResource("2_dsg4t")
 
 [node name="Panel" type="Panel" parent="." unique_id=1183457897]
 layout_mode = 1

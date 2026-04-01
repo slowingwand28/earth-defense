@@ -29,6 +29,8 @@ public partial class RegionMenu : Control
 	private Button _upgradeStrengthButton; // Button to upgrade strength
 	private Button _upgradeEfficiencyButton; // Button to upgrade efficiency
 	private Button _exitButton; // Button to close the menu
+	[Export] public AudioStream _menuToggleSfx; // Played when this menu opens or closes
+	private AudioStreamPlayer _menuSfxPlayer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -48,6 +50,8 @@ public partial class RegionMenu : Control
 		_upgradeStrengthButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Strength); // Connect the strength upgrade button to emit an upgrade signal with the type Strength
 		_upgradeEfficiencyButton.Pressed += () => EmitSignal(SignalName.Upgrade, (int)UpgradeType.Efficiency); // Connect the efficiency upgrade button to emit an upgrade signal with the type Efficiency
 		_exitButton.Pressed += OnExitButtonPressed;
+        _menuSfxPlayer = new AudioStreamPlayer{Name = "MenuSfxPlayer"}; // Create a new AudioStreamPlayer for playing menu sound effects
+        AddChild(_menuSfxPlayer);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,7 +61,15 @@ public partial class RegionMenu : Control
 
 	private void OnExitButtonPressed() // Handler for the exit button press event, could be replaced with a lambda for simplicity
 	{
+		PlayMenuToggleSfx();
 		Visible = false; // Hide the menu when the exit button is pressed
+	}
+
+	public void OpenMenu(string name, int resources, int defense)
+	{
+		Visible = true;
+		SetMenu(name, resources, defense);
+		PlayMenuToggleSfx();
 	}
 
 	public void SetMenu(string name, int resources, int defense) // Method to update the menu with the selected region's information
@@ -77,5 +89,16 @@ public partial class RegionMenu : Control
 		_upgradeResourcesButton.Disabled = resources < resourcesCost;
 		_upgradeStrengthButton.Disabled = resources < strengthCost;
 		_upgradeEfficiencyButton.Disabled = resources < efficiencyCost;
+	}
+
+	private void PlayMenuToggleSfx()
+	{
+		if (_menuToggleSfx == null || _menuSfxPlayer == null)
+		{
+			return;
+		}
+
+		_menuSfxPlayer.Stream = _menuToggleSfx;
+		_menuSfxPlayer.Play();
 	}
 }

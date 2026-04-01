@@ -12,12 +12,17 @@ extends CanvasLayer
 var is_paused = false
 var current_state = "none"  # none, pause, end
 var end_state = null  # Will store "victory" or "defeat"
+@export var menu_toggle_sfx: AudioStream
+var menu_sfx_player: AudioStreamPlayer
 
 func _ready():
 	# Connect button signals
 	resume_button.pressed.connect(_on_resume_pressed)
 	restart_button.pressed.connect(_on_restart_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	menu_sfx_player = AudioStreamPlayer.new()
+	menu_sfx_player.name = "MenuSfxPlayer"
+	add_child(menu_sfx_player)
 	
 	# Set to always process even when tree is paused
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -48,6 +53,7 @@ func _show_pause_menu():
 	is_paused = true
 	current_state = "pause"
 	get_tree().paused = true
+	_play_menu_toggle_sfx()
 	
 	title_label.text = "PAUSED"
 	subtitle_label.text = ""
@@ -60,6 +66,7 @@ func _resume_game():
 	current_state = "none"
 	get_tree().paused = false
 	background.visible = false
+	_play_menu_toggle_sfx()
 
 func _on_pause_requested():
 	_toggle_pause()
@@ -69,6 +76,7 @@ func _on_game_over(end_state_value: int):
 	is_paused = true
 	current_state = "end"
 	get_tree().paused = true
+	_play_menu_toggle_sfx()
 	
 	if end_state_value == 0:  # Defeat
 		end_state = "defeat"
@@ -101,3 +109,10 @@ func _on_restart_pressed():
 func _on_quit_pressed():
 	get_tree().paused = false
 	get_tree().quit()
+
+func _play_menu_toggle_sfx():
+	if menu_toggle_sfx == null or menu_sfx_player == null:
+		return
+
+	menu_sfx_player.stream = menu_toggle_sfx
+	menu_sfx_player.play()

@@ -8,6 +8,8 @@ public partial class World : Node2D
     [Export] public int _attackIncreasePerWave = 2; // Increases pressure each attack so late game is harder
     [Export] public int _attackFrequency = 4; // Attack every N turns
     [Export] public int _winTurn = 45; // Survive until this turn to win
+    [Export] public AudioStream _attackSfx; // Played whenever an attack wave occurs
+    [Export] public AudioStream _upgradeSfx; // Played when an upgrade is successfully purchased
     [Signal] public delegate void TurnPassedEventHandler(); // Signal to notify when the turn has been passed
     [Signal] public delegate void GameOverEventHandler(EndState endState); // Signal to notify when the game is over, can be used to trigger endgame events or screens
     [Signal] public delegate void PauseGameEventHandler(); // Signal to notify when the game is paused, can be used to trigger pause menu or effects
@@ -17,6 +19,7 @@ public partial class World : Node2D
     private Button _turnButton; // Button to pass the turn, can be used to trigger end-of-turn events
     private Button _pauseButton; // Button to pause the game, can be used to trigger the pause signal and show the pause menu
     private Label _turnLabel; // Label to display the current turn count, can be updated each turn
+    private AudioStreamPlayer _sfxPlayer; // Shared one-shot player for world-level SFX
     private int _turnCount = 1; // Counter to keep track of the number of turns that have passed, can be used for game progression or events
     public enum EndState
     {
@@ -33,6 +36,8 @@ public partial class World : Node2D
         _allRegions = GetNode("AllRegions"); // Get the node that holds all regions
         _turnLabel = GetNode<Label>("TurnLabel"); // Get the label to display the turn count
         _turnLabel.Text = $"Turn: {_turnCount}"; // Set the initial turn count text
+        _sfxPlayer = new AudioStreamPlayer{Name = "SfxPlayer"}; // Create a new AudioStreamPlayer for playing sound effects
+        AddChild(_sfxPlayer);
         _turnButton = GetNode<Button>("TurnButton"); // Get the button to pass the turn
         _pauseButton = GetNode<Button>("PauseButton"); // Get the button to pause the game
         _turnButton.Pressed += OnTurnButtonPressed; // Connect the button's pressed signal to emit the TurnPassed signal when clicked
@@ -52,8 +57,7 @@ public partial class World : Node2D
     private void OnRegionClicked(RegionControl region) // Handler for when a region is clicked
     {
         _selectedRegion = region;
-        _regionMenu.Visible = true; // Show the region menu
-        _regionMenu.SetMenu(region.RegionName, region.ResourceStock, region.Strength); // Set the menu information based on the clicked region
+        _regionMenu.OpenMenu(region.RegionName, region.ResourceStock, region.Strength); // Open and populate the region menu
     }
 
     private void OnUpgradeRequested(int upgradeTypeValue)
@@ -101,6 +105,7 @@ public partial class World : Node2D
 
         // Refresh menu values after applying the upgrade.
         _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
+        PlaySfx(_upgradeSfx);
     }
 
     private void OnTurnButtonPressed() // Handler for when the turn button is pressed
@@ -117,6 +122,7 @@ public partial class World : Node2D
 
         if (_turnCount % _attackFrequency == 0) // Attacks every configured number of turns
         {
+            PlaySfx(_attackSfx);
             attack();
             if (ActiveRegions().Count == 0) // Check if all regions have been conquered after the attack
             {
@@ -174,5 +180,16 @@ public partial class World : Node2D
     private void OnPauseButtonPressed() // Handler for when the pause button is pressed
     {
         EmitSignal(SignalName.PauseGame); // Emit the pause signal to notify UI controller
+    }
+
+    private void PlaySfx(AudioStream stream)
+    {
+        if (stream == null || _sfxPlayer == null)
+        {
+            return;
+        }
+
+        _sfxPlayer.Stream = stream;
+        _sfxPlayer.Play();
     }
 }

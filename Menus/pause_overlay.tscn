@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://7k75keousxdk"]
 
 [ext_resource type="Script" uid="uid://dsevtpe2wdv67" path="res://Menus/UIController.gd" id="1_controller"]
+[ext_resource type="AudioStream" uid="uid://cdjq7mpd85ou2" path="res://Asssets/Audio/Menu.wav" id="2_g5jui"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0, 0, 0, 0.8)
@@ -35,6 +36,7 @@ border_width_bottom = 2
 
 [node name="PauseOverlay" type="CanvasLayer" unique_id=770283503]
 script = ExtResource("1_controller")
+menu_toggle_sfx = ExtResource("2_g5jui")
 
 [node name="Background" type="Control" parent="." unique_id=1461884748]
 visible = false

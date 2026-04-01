@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bjn1rytvy8evt"]
 
 [ext_resource type="Script" uid="uid://djydtcyqa8axk" path="res://Game World/World.cs" id="1_oqs7e"]
+[ext_resource type="AudioStream" uid="uid://df2kmpx8eioho" path="res://Asssets/Audio/Alarm.wav" id="2_j8ly2"]
 [ext_resource type="PackedScene" uid="uid://ddru62awu76b" path="res://Regions/region_control.tscn" id="2_oqs7e"]
+[ext_resource type="AudioStream" uid="uid://bu7vbxnyda8cr" path="res://Asssets/Audio/Upgrade.wav" id="3_0vtjj"]
 [ext_resource type="PackedScene" uid="uid://cvqfx874uxxuy" path="res://Menus/region_menu.tscn" id="3_sb6le"]
 [ext_resource type="Texture2D" uid="uid://bca0qe2mlepuv" path="res://Asssets/North America.png" id="3_w3x0f"]
 [ext_resource type="Texture2D" uid="uid://bsvu2xx4nj813" path="res://Asssets/South America.png" id="4_dun3q"]
@@ -14,6 +16,8 @@
 [node name="World" type="Node2D" unique_id=433453165]
 process_mode = 1
 script = ExtResource("1_oqs7e")
+_attackSfx = ExtResource("2_j8ly2")
+_upgradeSfx = ExtResource("3_0vtjj")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=298314057]
 offset_left = -12.0
