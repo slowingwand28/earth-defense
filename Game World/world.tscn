@@ -13,6 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://121ywvo42f3i" path="res://Asssets/Europe.png" id="7_16hff"]
 [ext_resource type="Texture2D" uid="uid://kmprdessdhy4" path="res://Asssets/Africa.png" id="8_syi71"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vtjj"]
+bg_color = Color(0.8862745, 0.11764706, 0.14901961, 0.3137255)
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color(0.8873109, 0.11643911, 0.14756253, 1)
+border_blend = true
+
 [node name="World" type="Node2D" unique_id=433453165]
 process_mode = 1
 script = ExtResource("1_oqs7e")
@@ -158,6 +167,14 @@ offset_right = 576.0
 offset_bottom = 304.0
 
 [node name="PauseOverlay" parent="." unique_id=383955342 instance=ExtResource("4_pause")]
+
+[node name="Frame" type="Panel" parent="." unique_id=948757675]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vtjj")
 
 [editable path="AllRegions/RegionControl"]
 [editable path="AllRegions/RegionControl2"]

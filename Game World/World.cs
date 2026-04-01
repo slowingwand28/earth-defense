@@ -20,6 +20,7 @@ public partial class World : Node2D
     private Button _pauseButton; // Button to pause the game, can be used to trigger the pause signal and show the pause menu
     private Label _turnLabel; // Label to display the current turn count, can be updated each turn
     private AudioStreamPlayer _sfxPlayer; // Shared one-shot player for world-level SFX
+    private Panel _frame; // UI panel to tween for visual representation of attacks
     private int _turnCount = 1; // Counter to keep track of the number of turns that have passed, can be used for game progression or events
     public enum EndState
     {
@@ -36,6 +37,7 @@ public partial class World : Node2D
         _allRegions = GetNode("AllRegions"); // Get the node that holds all regions
         _turnLabel = GetNode<Label>("TurnLabel"); // Get the label to display the turn count
         _turnLabel.Text = $"Turn: {_turnCount}"; // Set the initial turn count text
+        _frame = GetNode<Panel>("Frame"); // Get the panel to use for attack visual effects
         _sfxPlayer = new AudioStreamPlayer{Name = "SfxPlayer"}; // Create a new AudioStreamPlayer for playing sound effects
         AddChild(_sfxPlayer);
         _turnButton = GetNode<Button>("TurnButton"); // Get the button to pass the turn
@@ -175,6 +177,14 @@ public partial class World : Node2D
                 region.Strength -= attackDamage; // Reduce the region's strength by the attack damage
             }
         }
+        attackVisual(); // Trigger the attack visual effects
+    }
+
+    private void attackVisual() // Implementation for attack visual effects
+    {
+        var tween = GetTree().CreateTween(); // Create a new tween for animating the attack effect
+        tween.TweenProperty(_frame, "modulate:a", 1, 2);
+        tween.TweenProperty(_frame, "modulate:a", 0, 2).SetDelay(1); // Fade the frame in and out to visually represent the attack wave
     }
 
     private void OnPauseButtonPressed() // Handler for when the pause button is pressed
