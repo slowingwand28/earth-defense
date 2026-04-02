@@ -17,12 +17,14 @@ public partial class RegionControl : Control
 
     private TextureRect _color; // Reference to the TextureRect node for changing color
     private Node2D _world; // Reference to the world node, can be used for interactions with the world
+    private GpuParticles2D _fireEffect; // Reference to the particle effect for visual feedback on destroyed regions
         
     public override void _Ready() // Called when the node enters the scene tree for the first time.
     {
         _world = GetTree().Root.GetNode<Node2D>("World"); // Get a reference to the world node, assuming it's at the root of the scene tree
         _color = GetNode<TextureRect>("TextureRect");
-        _color.Modulate = RegionColor;
+        _color.SelfModulate = RegionColor;
+        _fireEffect = _color.GetChild<GpuParticles2D>(0); // Get the particle effect node for visual feedback on destroyed regions
         GuiInput += OnGuiInput; // Connect the input event to the handler
         _world.Connect("TurnPassed", new Callable(this, nameof(OnTurnPassed))); // Connect the TurnPassed signal from the world to the handler
     }
@@ -52,7 +54,8 @@ public partial class RegionControl : Control
     {
         Active = false; // Mark the region as inactive
         RegionColor = new Color(0, 0, 0); // Change the region's color to black to indicate it's conquered
-        _color.Modulate = RegionColor; // Update the color of the TextureRect to reflect the change
+        _color.SelfModulate = RegionColor; // Update the color of the TextureRect to reflect the change
+        _fireEffect.Emitting = true; // Start the fire effect
         GD.Print($"{RegionName} was conquered!");
     }
 }

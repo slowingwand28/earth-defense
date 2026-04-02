@@ -3,6 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://b107i655qqqhv" path="res://Asssets/White Box.png" id="1_r1alo"]
 [ext_resource type="Script" uid="uid://bwsanrbevjpg6" path="res://Regions/RegionControl.cs" id="1_xn0e0"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xn0e0"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+spread = 60.0
+gravity = Vector3(0, -98, 0)
+scale_min = 5.0
+scale_max = 20.0
+color = Color(0.9840041, 0, 0.15854707, 1)
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.14999998
+
 [node name="RegionControl" type="Control" unique_id=10099660]
 layout_mode = 3
 anchors_preset = 0
@@ -22,3 +35,12 @@ offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_r1alo")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TextureRect" unique_id=976370104]
+z_index = 4
+z_as_relative = false
+position = Vector2(165.5, 149)
+emitting = false
+amount = 100
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_xn0e0")
