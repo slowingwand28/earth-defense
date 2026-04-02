@@ -67,20 +67,38 @@ public partial class RegionMenu : Control
 
 	public void OpenMenu(string name, int resources, int defense)
 	{
+		OpenMenu(
+			name,
+			resources,
+			defense,
+			GetUpgradeCost(UpgradeType.Resources),
+			GetUpgradeCost(UpgradeType.Strength),
+			GetUpgradeCost(UpgradeType.Efficiency));
+	}
+
+	public void OpenMenu(string name, int resources, int defense, int resourcesCost, int strengthCost, int efficiencyCost)
+	{
 		Visible = true;
-		SetMenu(name, resources, defense);
+		SetMenu(name, resources, defense, resourcesCost, strengthCost, efficiencyCost);
 		PlayMenuToggleSfx();
 	}
 
 	public void SetMenu(string name, int resources, int defense) // Method to update the menu with the selected region's information
 	{
+		SetMenu(
+			name,
+			resources,
+			defense,
+			GetUpgradeCost(UpgradeType.Resources),
+			GetUpgradeCost(UpgradeType.Strength),
+			GetUpgradeCost(UpgradeType.Efficiency));
+	}
+
+	public void SetMenu(string name, int resources, int defense, int resourcesCost, int strengthCost, int efficiencyCost) // Method to update the menu with the selected region's information
+	{
 		_regionNameLabel.Text = $"Region: {name}"; // Update the region name label
 		_resourceCountLabel.Text = $"Resources: {resources}"; // Update the resource count label
 		_regionStrengthLabel.Text = $"Strength: {defense}"; // Update the region strength label
-
-		int resourcesCost = GetUpgradeCost(UpgradeType.Resources);
-		int strengthCost = GetUpgradeCost(UpgradeType.Strength);
-		int efficiencyCost = GetUpgradeCost(UpgradeType.Efficiency);
 
 		_resourcesCostLabel.Text = $"Cost: {resourcesCost}";
 		_strengthCostLabel.Text = $"Cost: {strengthCost}";

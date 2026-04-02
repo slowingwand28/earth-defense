@@ -4,10 +4,20 @@ using System.Collections.Generic;
 
 public partial class World : Node2D
 {
-    [Export] public int _attackStrength = 24; // Base strength of each attack wave
-    [Export] public int _attackIncreasePerWave = 2; // Increases pressure each attack so late game is harder
-    [Export] public int _attackFrequency = 4; // Attack every N turns
-    [Export] public int _winTurn = 45; // Survive until this turn to win
+    public enum DifficultyPreset
+    {
+        Easy,
+        Balanced,
+        Hard,
+        Custom
+    }
+
+    [Export] public DifficultyPreset _difficultyPreset = DifficultyPreset.Balanced; // One-click preset selection in inspector
+    [Export] public int _attackStrength = 26; // Base strength of each attack wave
+    [Export] public int _attackIncreasePerWave = 3; // Increases pressure each attack so late game is harder
+    [Export] public int _attackFrequency = 3; // Attack every N turns
+    [Export] public int _winTurn = 46; // Survive until this turn to win
+    [Export] public int _attackDamageFloorBonus = 1; // Extra flat damage applied per attacked region
     [Export] public AudioStream _attackSfx; // Played whenever an attack wave occurs
     [Export] public AudioStream _upgradeSfx; // Played when an upgrade is successfully purchased
     [Signal] public delegate void TurnPassedEventHandler(); // Signal to notify when the turn has been passed
@@ -31,6 +41,7 @@ public partial class World : Node2D
      // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        ApplyDifficultyPreset();
         _regionMenu = GetNode<RegionMenu>("RegionMenu"); // Get the region menu control
         _regionMenu.Visible = false; // Hide the region menu initially
         _regionMenu.Upgrade += OnUpgradeRequested;
@@ -59,7 +70,7 @@ public partial class World : Node2D
     private void OnRegionClicked(RegionControl region) // Handler for when a region is clicked
     {
         _selectedRegion = region;
-        _regionMenu.OpenMenu(region.RegionName, region.ResourceStock, region.Strength); // Open and populate the region menu
+        RefreshSelectedRegionMenu(); // Open and populate the region menu
     }
 
     private void OnUpgradeRequested(int upgradeTypeValue)
@@ -72,7 +83,7 @@ public partial class World : Node2D
 
         // Convert the integer payload from the UI signal into the typed enum.
         RegionMenu.UpgradeType upgradeType = (RegionMenu.UpgradeType)upgradeTypeValue;
-        int upgradeCost = RegionMenu.GetUpgradeCost(upgradeType);
+        int upgradeCost = _selectedRegion.GetUpgradeCost(upgradeType);
 
         // Prevent upgrades when resources are insufficient.
         if (_selectedRegion.ResourceStock < upgradeCost)
@@ -90,15 +101,18 @@ public partial class World : Node2D
             case RegionMenu.UpgradeType.Resources:
                 // Increase per-turn resource growth.
                 _selectedRegion.BaseResourceGrowth += 1;
+                _selectedRegion.ResourceUpgradeLevel += 1;
                 break;
             case RegionMenu.UpgradeType.Strength:
                 // Increase per-turn strength growth.
                 _selectedRegion.BaseStrengthGrowth += 1;
+                _selectedRegion.StrengthUpgradeLevel += 1;
                 break;
             case RegionMenu.UpgradeType.Efficiency:
                 // Improve both resource and strength scaling multipliers.
-                _selectedRegion.ResourceMultiplier += 0.15f;
-                _selectedRegion.StrengthMultiplier += 0.15f;
+                _selectedRegion.ResourceMultiplier += 0.10f;
+                _selectedRegion.StrengthMultiplier += 0.10f;
+                _selectedRegion.EfficiencyUpgradeLevel += 1;
                 break;
             default:
                 GD.PushWarning($"Unknown upgrade type: {upgradeType}");
@@ -106,7 +120,7 @@ public partial class World : Node2D
         }
 
         // Refresh menu values after applying the upgrade.
-        _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
+        RefreshSelectedRegionMenu();
         PlaySfx(_upgradeSfx);
     }
 
@@ -119,7 +133,7 @@ public partial class World : Node2D
         // Keep the open menu in sync with the selected region's latest turn values.
         if (_selectedRegion != null)
         {
-            _regionMenu.SetMenu(_selectedRegion.RegionName, _selectedRegion.ResourceStock, _selectedRegion.Strength);
+            RefreshSelectedRegionMenu();
         }
 
         if (_turnCount % _attackFrequency == 0) // Attacks every configured number of turns
@@ -165,7 +179,8 @@ public partial class World : Node2D
             return;
         }
 
-        var attackDamage = _attackStrength / targets.Count; // Distribute attack strength evenly among active regions
+        // Keep pressure high even with many surviving regions by applying a per-target floor.
+        var attackDamage = Mathf.Max(1, Mathf.RoundToInt((float)_attackStrength / targets.Count) + _attackDamageFloorBonus);
         foreach (RegionControl region in targets) // Loop through target regions and apply damage based on the attack strength
         {
             if (region.Strength <= attackDamage) // If the region's strength is less than or equal to the attack damage, it is conquered
@@ -178,6 +193,22 @@ public partial class World : Node2D
             }
         }
         attackVisual(); // Trigger the attack visual effects
+    }
+
+    private void RefreshSelectedRegionMenu()
+    {
+        if (_selectedRegion == null)
+        {
+            return;
+        }
+
+        _regionMenu.OpenMenu(
+            _selectedRegion.RegionName,
+            _selectedRegion.ResourceStock,
+            _selectedRegion.Strength,
+            _selectedRegion.GetUpgradeCost(RegionMenu.UpgradeType.Resources),
+            _selectedRegion.GetUpgradeCost(RegionMenu.UpgradeType.Strength),
+            _selectedRegion.GetUpgradeCost(RegionMenu.UpgradeType.Efficiency));
     }
 
     private void attackVisual() // Implementation for attack visual effects
@@ -201,5 +232,37 @@ public partial class World : Node2D
 
         _sfxPlayer.Stream = stream;
         _sfxPlayer.Play();
+    }
+
+    private void ApplyDifficultyPreset()
+    {
+        switch (_difficultyPreset)
+        {
+            case DifficultyPreset.Easy:
+                _attackStrength = 22;
+                _attackIncreasePerWave = 2;
+                _attackFrequency = 4;
+                _winTurn = 42;
+                _attackDamageFloorBonus = 0;
+                break;
+            case DifficultyPreset.Balanced:
+                _attackStrength = 26;
+                _attackIncreasePerWave = 3;
+                _attackFrequency = 3;
+                _winTurn = 46;
+                _attackDamageFloorBonus = 1;
+                break;
+            case DifficultyPreset.Hard:
+                _attackStrength = 30;
+                _attackIncreasePerWave = 4;
+                _attackFrequency = 3;
+                _winTurn = 50;
+                _attackDamageFloorBonus = 2;
+                break;
+            case DifficultyPreset.Custom:
+            default:
+                // Leave exported values unchanged for manual tuning.
+                break;
+        }
     }
 }
