@@ -29,6 +29,7 @@ To recreate the development environment, you need the following software and/or 
   * C# Dev Kit
   * C# Tools for Godot
   * Godot Tools
+* Gimp or any image editing software for creating and editing game assets
 
 ## Useful Websites to Learn More
 
@@ -37,12 +38,16 @@ I found these websites useful in developing this software:
 * [Godot Engine Documentation](https://docs.godotengine.org)
 * [Godot C# API Documentation](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/)
 * [W3Schools C# Tutorial](https://www.w3schools.com/cs/index.php)
+* [Godot Audio Documentation](https://docs.godotengine.org/en/stable/tutorials/audio/index.html)
+* [Godot Tween Documentation](https://docs.godotengine.org/en/stable/classes/class_tween.html)
+* [Godot 2D Particle Systems Documentation](https://docs.godotengine.org/en/latest/tutorials/2d/particle_systems_2d.html)
+* [SFXR Sound Effect Generator](https://sfxr.me/)
 
 ## Future Work
 
 The following items I plan to fix, improve, and/or add to this project in the future:
 
-* [ ] Implement sound effects and background music
-* [ ] Add visual feedback for region upgrades and destruction
-* [ ] Replace placeholder graphics with custom art assets
-* [ ] Adjust game balance for attack wave difficulty and resource growth
+* [ ] Add visual feedback for region upgrades
+* [ ] Adjust game balance for attack wave difficulty and resource growth, posibly reworking the entire upgrade system
+* [ ] Fix bug causing end turn button to open upgrade menu
+* [ ] Make region information more clear and accessible
