@@ -16,8 +16,8 @@ Instructions for using the software:
 1. Each turn, select a region by clicking on it to open the upgrade menu
 2. Choose from three upgrade types: Infrastructure (resources), Military (strength), or Efficiency (growth multipliers)
 3. Plan your defenses strategically—each region grows resources and strength each turn based on multipliers
-4. Attack waves occur every 4 turns with increasing difficulty
-5. Survive until turn 45 to win; if your regions are destroyed, you lose
+4. Attack waves occur every configured number of turns, damaging regions based on their strength and the attack wave's power
+5. Survive until a configured number of turns passes to win; if your regions are destroyed, you lose
 
 ## Development Environment
 
