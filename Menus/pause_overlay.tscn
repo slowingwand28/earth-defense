@@ -35,6 +35,7 @@ border_width_right = 2
 border_width_bottom = 2
 
 [node name="PauseOverlay" type="CanvasLayer" unique_id=770283503]
+layer = 5
 script = ExtResource("1_controller")
 menu_toggle_sfx = ExtResource("2_g5jui")
 
